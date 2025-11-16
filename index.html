@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GHSS MUNDERI | Rovers & Rangers</title>
+    <meta name="description" content="Official project site for GHSS MUNDERI Rovers & Guides. Activities, projects, events, and community service." />
+    <meta property="og:title" content="GHSS MUNDERI | Rovers & Rangers" />
+    <meta property="og:description" content="Official project site for GHSS MUNDERI Rovers & Rangers." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/assets/cover.jpg" />
+    <meta name="theme-color" content="#0ea5e9" />
+
+    <!-- Tailwind CSS (CDN for simple deploys). For production, you can switch to a build if you want. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Favicon (optional). Place your icon at /assets/favicon.png -->
+    <link rel="icon" href="/assets/favicon.png" />
+
+    <style>
+      /* Small extras */
+      .glass { backdrop-filter: blur(10px); background: rgba(255,255,255,0.6); }
+      .dark .glass { background: rgba(17, 24, 39, 0.6); }
+    </style>
+  </head>
+  <body class="min-h-screen bg-gradient-to-b from-sky-50 via-white to-white text-gray-800 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900 dark:text-gray-100">
+    <!-- Header / Nav -->
+    <header class="sticky top-0 z-50 border-b border-sky-100/60 dark:border-gray-800 bg-white/80 dark:bg-gray-900/70 glass">
+      <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+        <a href="#home" class="flex items-center gap-3">
+          <img src="/assets/GHSSMLOGO.jpg" alt="GHSS MUNDERI" class="h-10 w-10 rounded-lg object-cover ring-2 ring-sky-300/70" />
+          <div>
+            <p class="text-sm tracking-wide text-sky-600 dark:text-sky-300">GHSS MUNDERI</p>
+            <h1 class="font-bold leading-tight">Rovers & Rangers</h1>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#about" class="hover:text-sky-600">About</a>
+          <a href="#projects" class="hover:text-sky-600">Projects</a>
+          <a href="#events" class="hover:text-sky-600">Events</a>
+          <a href="#gallery" class="hover:text-sky-600">Gallery</a>
+          <a href="#team" class="hover:text-sky-600">Team</a>
+          <a href="#contact" class="hover:text-sky-600">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <button id="themeToggle" class="rounded-xl border px-3 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-800 border-gray-200 dark:border-gray-700">🌙/☀️</button>
+          <button id="menuBtn" class="md:hidden rounded-xl border px-3 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-800 border-gray-200 dark:border-gray-700">Menu</button>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobileMenu" class="md:hidden hidden border-t border-gray-200 dark:border-gray-800 bg-white/90 dark:bg-gray-900/90 glass">
+        <div class="max-w-7xl mx-auto px-4 py-3 grid gap-2 text-sm">
+          <a href="#about" class="py-2">About</a>
+          <a href="#projects" class="py-2">Projects</a>
+          <a href="#events" class="py-2">Events</a>
+          <a href="#gallery" class="py-2">Gallery</a>
+          <a href="#team" class="py-2">Team</a>
+          <a href="#contact" class="py-2">Contact</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="relative overflow-hidden">
+      <div class="absolute inset-0 -z-10">
+        <!-- Replace /assets/cover.jpg with your hero image -->
+        <img src="/assets/cover.jpg" alt="" class="h-full w-full object-cover opacity-80" />
+        <div class="absolute inset-0 bg-gradient-to-t from-white via-white/60 to-transparent dark:from-gray-900 dark:via-gray-900/60"></div>
+      </div>
+      <div class="mx-auto max-w-7xl px-4 py-20 md:py-28">
+        <div class="max-w-3xl">
+          <span class="inline-flex items-center rounded-full bg-sky-100 text-sky-700 px-3 py-1 text-xs font-medium dark:bg-sky-900/40 dark:text-sky-200">Bharat Scouts & Guides • School Unit</span>
+          <h2 class="mt-4 text-4xl md:text-6xl font-extrabold leading-tight">Service, Leadership, and Adventure</h2>
+          <p class="mt-4 text-base md:text-lg text-gray-600 dark:text-gray-300">Welcome to the official site of GHSS MUNDERI Rovers & Rangers. Explore our projects, events, and community initiatives.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#projects" class="rounded-xl bg-sky-600 px-5 py-3 text-white hover:bg-sky-700">See Projects</a>
+            <a href="#contact" class="rounded-xl border border-gray-300 px-5 py-3 hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="mx-auto max-w-7xl px-4 py-16">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h3 class="text-2xl md:text-3xl font-bold">About the Unit</h3>
+          <p class="mt-4 text-gray-600 dark:text-gray-300">GHSS MUNDERI Rovers & Rangers aims to build leadership, discipline, and community service among students. We participate in school and community projects, environmental activities, and skill development programs.</p>
+          <ul class="mt-4 list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1">
+            <li>Community service and cleanliness drives</li>
+            <li>First aid, safety, and life skills</li>
+            <li>Camps, hikes, and outdoor learning</li>
+            <li>Project-based learning and teamwork</li>
+          </ul>
+        </div>
+        <div>
+          <!-- Replace /assets/about.jpg -->
+          <img src="/assets/about.jpg" alt="About Rovers & Rangers" class="rounded-2xl shadow-xl ring-1 ring-gray-200/60 dark:ring-gray-800" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="bg-gray-50 dark:bg-gray-950/40 py-16">
+      <div class="mx-auto max-w-7xl px-4">
+        <div class="flex items-end justify-between">
+          <div>
+            <h3 class="text-2xl md:text-3xl font-bold">Our Projects</h3>
+            <p class="mt-2 text-gray-600 dark:text-gray-300"></p>
+          </div>
+          <a href="#contact" class="text-sm hover:text-sky-600">Want to Donate?</a>
+        </div>
+
+        <!-- Project grid: Duplicate a card and update the placeholders -->
+        <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <!-- CARD 1 -->
+          <article class="rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm">
+            <img src="/assets/projects/paperbag1.jpg" alt="Project image" class="h-44 w-full object-cover" />
+            <div class="p-5">
+              <h4 class="font-semibold">Paper Bag Making</h4>
+              <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">We made paper bags as part of our Bob-a-Job duty, promoting eco-friendly use and reducing plastic.</p>
+              <div class="mt-3 flex items-center gap-3 text-xs">
+                <span class="rounded-full bg-sky-100 text-sky-700 px-2 py-1 dark:bg-sky-900/40 dark:text-sky-200">Activities</span>
+                <span class="text-gray-500">2025</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 2 -->
+          <article class="rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm">
+            <img src="/assets/projects/teamwork.jpg" alt="Project image" class="h-44 w-full object-cover" />
+            <div class="p-5">
+              <h4 class="font-semibold">Orphanage Visit</h4>
+              <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">We visited a nearby orphanage, spent time there, and offered our support. It was a meaningful experience.</p>
+              <div class="mt-3 flex items-center gap-3 text-xs">
+                <span class="rounded-full bg-purple-100 text-purple-700 px-2 py-1 dark:bg-purple-900/40 dark:text-purple-200">Community Service</span>
+                <span class="text-gray-500">2025</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 3 -->
+          <article class="rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm">
+            <img src="/assets/projects/cleaning.jpg" alt="Project image" class="h-44 w-full object-cover" />
+            <div class="p-5">
+              <h4 class="font-semibold">Cleaning Roadside</h4>
+              <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">We cleaned the roadside and campus as Scouts & Guides to keep our surroundings neat and responsible.</p>
+              <div class="mt-3 flex items-center gap-3 text-xs">
+                <span class="rounded-full bg-emerald-100 text-emerald-700 px-2 py-1 dark:bg-emerald-900/40 dark:text-emerald-200">Environment Care</span>
+                <span class="text-gray-500">2024</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Simple how-to note inside code for your team -->
+        <!--
+          To add a new project card, copy one <article>...</article> block above,
+          change the <img src>, <h4>, <p> and tags.
+          Put your images in /assets/projects/ and update the file names.
+        -->
+      </div>
+    </section>
+
+    <!-- Events / Timeline -->
+    <section id="events" class="mx-auto max-w-7xl px-4 py-16">
+      <h3 class="text-2xl md:text-3xl font-bold">Events</h3>
+      <p class="mt-2 text-gray-600 dark:text-gray-300">Camps, celebrations, and special days.</p>
+
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        <div class="rounded-2xl border p-5 border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+          <h4 class="font-semibold">Dwidiya Sopan Camp</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">29,30 November</p>
+          <p class="text-sm mt-2">School-level activities and service projects.</p>
+        </div>
+        <div class="rounded-2xl border p-5 border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+          <h4 class="font-semibold">Training Camp</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">Yearly</p>
+          <p class="text-sm mt-2">Overnight camp with skills, games, and patrol activities.</p>
+        </div>
+        <div class="rounded-2xl border p-5 border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+          <h4 class="font-semibold">Community Service Day</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">Monthly</p>
+          <p class="text-sm mt-2">Neighborhood cleanup and awareness programs.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="bg-gray-50 dark:bg-gray-950/40 py-16">
+      <div class="mx-auto max-w-7xl px-4">
+        <h3 class="text-2xl md:text-3xl font-bold">Gallery</h3>
+        <p class="mt-2 text-gray-600 dark:text-gray-300">Some Pictures of Our Group Activities.</p>
+
+        <div class="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <img src="/assets/gallery/1.jpg" alt="Gallery image" class="h-40 w-full object-cover rounded-xl" />
+          <img src="/assets/gallery/2.jpg" alt="Gallery image" class="h-40 w-full object-cover rounded-xl" />
+          <img src="/assets/gallery/3.jpg" alt="Gallery image" class="h-40 w-full object-cover rounded-xl" />
+          <img src="/assets/gallery/4.jpg" alt="Gallery image" class="h-40 w-full object-cover rounded-xl" />
+          <img src="/assets/gallery/5.jpg" alt="Gallery image" class="h-40 w-full object-cover rounded-xl" />
+          <img src="/assets/gallery/6.jpg" alt="Gallery image" class="h-40 w-full object-cover rounded-xl" />
+          <img src="/assets/gallery/7.jpg" alt="Gallery image" class="h-40 w-full object-cover rounded-xl" />
+          <img src="/assets/gallery/8.jpg" alt="Gallery image" class="h-40 w-full object-cover rounded-xl" />
+          
+        </div>
+      </div>
+    </section>
+
+        <!-- CAMP VIBE -->
+    <section id="gallery" class="bg-gray-50 dark:bg-gray-950/40 py-16">
+      <div class="mx-auto max-w-7xl px-4">
+        <h3 class="text-2xl md:text-3xl font-bold">CAMP HIGHLIGHTS</h3>
+        <p class="mt-2 text-gray-600 dark:text-gray-300">Previous Camp Pictures.</p>
+
+        <div class="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <img src="/assets/campvibe/picture 1.jpg" alt="Gallery image" class="h-40 w-full object-cover rounded-xl" />
+          <img src="/assets/campvibe/picture 2.jpg" alt="Gallery image" class="h-40 w-full object-cover rounded-xl" />
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- Team -->
+    <section id="team" class="mx-auto max-w-7xl px-4 py-16">
+      <h3 class="text-2xl md:text-3xl font-bold">Team</h3>
+      <p class="mt-2 text-gray-600 dark:text-gray-300">Scout Masters, Patrol Leaders.</p>
+
+      <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <!-- Duplicate and edit cards as needed -->
+        <div class="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5">
+          <img src="/assets/team/leader1.png" alt="Leader photo" class="h-44 w-full object-cover rounded-xl" />
+          <h4 class="mt-4 font-semibold">Ms. Febina Ragesh</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300">Scout Master / Guide Captain</p>
+        </div>
+        <div class="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5">
+          <img src="/assets/team/leader2.png" alt="Leader photo" class="h-44 w-full object-cover rounded-xl" />
+          <h4 class="mt-4 font-semibold">Anek K Santhosh</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300">Patrol Leader</p>
+        </div>
+        <div class="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5">
+          <img src="/assets/team/leader3.png" alt="Leader photo" class="h-44 w-full object-cover rounded-xl" />
+          <h4 class="mt-4 font-semibold">Muhammed Murshid PV</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300">Patrol Leader</p>
+        </div>
+        <div class="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5">
+          <img src="/assets/team/leader4.png" alt="Leader photo" class="h-44 w-full object-cover rounded-xl" />
+          <h4 class="mt-4 font-semibold">Rithunandha</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-300">Guides Petrol Leader</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact (Netlify Form ready) -->
+    <section id="contact" class="bg-gray-50 dark:bg-gray-950/40 py-16">
+      <div class="mx-auto max-w-7xl px-4">
+        <h3 class="text-2xl md:text-3xl font-bold">Contact Us</h3>
+        <p class="mt-2 text-gray-600 dark:text-gray-300">Send us a message. This form works on Netlify with no backend.</p>
+
+        <!-- Netlify form: Works when deployed on Netlify. Check submissions in Netlify dashboard. -->
+        <form name="contact" method="POST" data-netlify="true" class="mt-8 max-w-2xl rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 grid gap-4">
+          <input type="hidden" name="form-name" value="contact" />
+
+          <label class="grid gap-1 text-sm">
+            <span>Name</span>
+            <input name="name" required class="rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent px-3 py-2" />
+          </label>
+
+          <label class="grid gap-1 text-sm">
+            <span>Email</span>
+            <input name="email" type="email" required class="rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent px-3 py-2" />
+          </label>
+
+          <label class="grid gap-1 text-sm">
+            <span>Message</span>
+            <textarea name="message" rows="4" required class="rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent px-3 py-2"></textarea>
+          </label>
+
+          <button class="mt-2 rounded-xl bg-sky-600 px-5 py-3 text-white hover:bg-sky-700">Send</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 dark:border-gray-800">
+      <div class="mx-auto max-w-7xl px-4 py-8 text-sm flex flex-col md:flex-row gap-3 items-center justify-between">
+        <p>© <span id="year"></span> GHSS MUNDERI Rovers & Rangers</p>
+        <div class="flex items-center gap-4">
+          <a href="#" class="hover:text-sky-1000">Website by Muhammed Murshid +2 Humanities</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Dark mode toggle
+      const themeToggle = document.getElementById('themeToggle');
+      themeToggle.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+        localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+      });
+      // Persist theme
+      (function(){
+        const t = localStorage.theme;
+        if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+
+      // Mobile menu toggle
+      const menuBtn = document.getElementById('menuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+      // Year in footer
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+    <!--
+      QUICK EDIT GUIDE ✅
+      1) Replace text like headings and descriptions directly in the HTML.
+      2) Place your images inside /assets/... and update the src paths.
+         - /assets/logo.png            school or unit logo
+         - /assets/cover.jpg           hero/cover image
+         - /assets/about.jpg           about section image
+         - /assets/projects/*.jpg      project images
+         - /assets/gallery/*.jpg       gallery images
+         - /assets/team/*.jpg          team photos
+      3) To add a new project or team member, duplicate one card block and edit.
+      4) Deploy steps (Netlify):
+         - Create a new folder, save this file as index.html
+         - Make an /assets/ folder with your images
+         - Zip the folder or push to GitHub
+         - On Netlify: New site from Git, or drag-and-drop the folder
+         - Forms will start working automatically in the Netlify dashboard
+    -->
+  </body>
+</html>
