@@ -1,0 +1,64 @@
+/* Small extras */
+.glass { backdrop-filter: blur(10px); background: rgba(255,255,255,0.6); }
+.dark .glass { background: rgba(17, 24, 39, 0.6); }
+
+/* Gallery hover "pop" styles */
+.gallery-grid { /* keeps Tailwind grid layout, add stacking context */ position: relative; }
+.gallery-item {
+  position: relative;
+  cursor: pointer;
+  transition: transform 300ms cubic-bezier(.2,.9,.2,1), box-shadow 300ms;
+  will-change: transform;
+  overflow: hidden;
+}
+.gallery-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform 350ms cubic-bezier(.2,.9,.2,1);
+  transform-origin: center center;
+  backface-visibility: hidden;
+}
+
+/* hover / focus effect */
+.gallery-item:hover,
+.gallery-item:focus-within {
+  transform: translateY(-8px) scale(1.02);
+  z-index: 20;
+  box-shadow: 0 18px 40px rgba(2,6,23,0.35);
+}
+.gallery-item:hover img,
+.gallery-item:focus-within img {
+  transform: scale(1.12);
+}
+
+/* caption overlay */
+.gallery-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.5rem 0.75rem;
+  color: #fff;
+  font-size: 0.85rem;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.65) 100%);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 220ms, transform 220ms;
+  pointer-events: none;
+}
+.gallery-item:hover .gallery-caption,
+.gallery-item:focus-within .gallery-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* small rounded overflow smoothing for images */
+.gallery-item img { border-radius: 0.5rem; }
+
+/* responsive tweak: reduce lift on small screens (touch devices) */
+@media (max-width: 640px) {
+  .gallery-item:hover { transform: none; box-shadow: none; }
+  .gallery-item img { transform: none; }
+  .gallery-caption { opacity: 1; transform: none; background: rgba(0,0,0,0.35); }
+}
