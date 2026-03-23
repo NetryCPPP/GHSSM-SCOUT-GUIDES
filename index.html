@@ -7,7 +7,7 @@
     <meta name="description" content="Official project site for GHSS MUNDERI Rovers & Guides. Activities, projects, events, and community service." />
     <meta property="og:title" content="GHSS MUNDERI | Rovers & Rangers" />
     <meta property="og:image" content="/assets/cover.jpg" />
-    <meta name="theme-color" content="#0ea5e9" />
+    <meta name="theme-color" content="#b83a26" />
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -16,20 +16,33 @@
         theme: {
           extend: {
             colors: {
-              scout: {
-                50: '#f0f9ff',
-                100: '#e0f2fe',
-                500: '#0ea5e9',
-                600: '#0284c7',
-                900: '#0c4a6e',
+              school: {
+                50: '#fef8f5',
+                100: '#fcedea',
+                200: '#f7d2cb',
+                500: '#d05340',
+                600: '#b83a26',
+                700: '#9a2e1d',
+                900: '#4d140b',
               },
-              guide: {
-                50: '#fdf4ff',
-                600: '#9333ea',
+              accent: {
+                50: '#fffbeb',
+                500: '#f59e0b',
+                600: '#d97706',
               }
             },
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
+            },
+            animation: {
+              'float': 'float 6s ease-in-out infinite',
+              'pulse-slow': 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+              }
             }
           }
         }
@@ -39,166 +52,223 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
     <style>
-      body { font-family: 'Inter', sans-serif; }
+      body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
       
+      /* =========================================
+         Custom Cursor Animations
+         (Only visible on non-touch devices)
+         ========================================= */
+      @media (pointer: fine) {
+        body, a, button, input, textarea, img.cursor-pointer {
+          cursor: none !important;
+        }
+        .cursor-dot {
+          position: fixed; top: 0; left: 0; width: 8px; height: 8px;
+          background-color: #b83a26; border-radius: 50%;
+          pointer-events: none; z-index: 10000;
+        }
+        .dark .cursor-dot { background-color: #f59e0b; }
+        
+        .cursor-outline {
+          position: fixed; top: 0; left: 0; width: 40px; height: 40px;
+          border: 2px solid rgba(184, 58, 38, 0.5); border-radius: 50%;
+          pointer-events: none; z-index: 9999;
+          transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
+        }
+        .dark .cursor-outline { border-color: rgba(245, 158, 11, 0.5); }
+        
+        /* Cursor Hover State */
+        .cursor-outline.hover {
+          width: 60px; height: 60px;
+          background-color: rgba(184, 58, 38, 0.1);
+          border-color: rgba(184, 58, 38, 0.8);
+        }
+        .dark .cursor-outline.hover {
+          background-color: rgba(245, 158, 11, 0.1);
+          border-color: rgba(245, 158, 11, 0.8);
+        }
+      }
+      @media (pointer: coarse) {
+        .cursor-dot, .cursor-outline { display: none !important; }
+      }
+
       /* Glassmorphism Header */
       .glass-header {
-        background: rgba(255, 255, 255, 0.85);
+        background: rgba(254, 248, 245, 0.85);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(255,255,255,0.3);
+        border-bottom: 1px solid rgba(184, 58, 38, 0.1);
       }
       .dark .glass-header {
         background: rgba(17, 24, 39, 0.85);
         border-bottom: 1px solid rgba(255,255,255,0.05);
       }
 
-      /* Glowing Button Animation */
-      .glow-btn {
-        transition: all 0.3s ease;
+      /* Nav Link Hover Underline */
+      .nav-link { position: relative; }
+      .nav-link::after {
+        content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+        background-color: #b83a26; transition: width 0.3s ease;
       }
-      /* Light mode glow (Sun) */
+      .dark .nav-link::after { background-color: #f59e0b; }
+      .nav-link:hover::after { width: 100%; }
+
+      /* Glowing Button Animation */
+      .glow-btn { transition: all 0.3s ease; }
       html:not(.dark) .glow-btn {
-        box-shadow: 0 0 15px rgba(234, 179, 8, 0.6);
-        background-color: rgba(254, 252, 232, 0.8);
-        border-color: #facc15;
-        color: #ca8a04;
+        box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+        background-color: #fffbeb; border-color: #fcd34d; color: #d97706;
       }
       html:not(.dark) .glow-btn:hover {
-        box-shadow: 0 0 25px rgba(234, 179, 8, 0.9);
-        transform: scale(1.05);
+        box-shadow: 0 0 25px rgba(245, 158, 11, 0.7); transform: scale(1.1);
       }
-      
-      /* Dark mode glow (Moon) */
       .dark .glow-btn {
-        box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
-        background-color: rgba(15, 23, 42, 0.8);
-        border-color: #38bdf8;
-        color: #38bdf8;
+        box-shadow: 0 0 15px rgba(184, 58, 38, 0.5);
+        background-color: rgba(15, 23, 42, 0.8); border-color: #b83a26; color: #b83a26;
       }
       .dark .glow-btn:hover {
-        box-shadow: 0 0 25px rgba(56, 189, 248, 0.8);
-        transform: scale(1.05);
+        box-shadow: 0 0 25px rgba(184, 58, 38, 0.8); transform: scale(1.1);
       }
+
+      /* Upgraded Scroll Reveal Animations (Scale + Fade + Slide) */
+      .reveal {
+        opacity: 0; transform: translateY(50px) scale(0.95);
+        transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+      .reveal.active {
+        opacity: 1; transform: translateY(0) scale(1);
+      }
+      .reveal-delay-1 { transition-delay: 0.1s; }
+      .reveal-delay-2 { transition-delay: 0.2s; }
+      .reveal-delay-3 { transition-delay: 0.3s; }
+      .reveal-delay-4 { transition-delay: 0.4s; }
     </style>
   </head>
-  <body class="min-h-screen bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+  <body class="min-h-screen bg-school-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
     
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
+
     <div id="lightbox" class="fixed inset-0 z-[100] hidden bg-black/90 backdrop-blur-md flex items-center justify-center p-4 transition-all duration-300 opacity-0" onclick="closeLightbox()">
-        <button class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors focus:outline-none z-[101]">
+        <button class="absolute top-6 right-6 text-white/70 hover:text-school-500 hover:rotate-90 hover:scale-110 transition-all duration-300 focus:outline-none z-[101]">
             <svg class="w-10 h-10 drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
-        <img id="lightbox-img" src="" alt="Full view" class="max-h-[90vh] max-w-[95vw] object-contain rounded-lg shadow-2xl transform transition-transform duration-300 scale-95 select-none" onclick="event.stopPropagation()" />
+        <img id="lightbox-img" src="" alt="Full view" class="max-h-[90vh] max-w-[95vw] object-contain rounded-lg shadow-2xl transform transition-transform duration-500 scale-95 select-none border-2 border-school-600/30" onclick="event.stopPropagation()" />
     </div>
 
     <header class="fixed top-0 w-full z-50 glass-header transition-all duration-300">
       <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
-        <a href="#home" class="flex items-center gap-3 group">
-          <div class="relative overflow-hidden rounded-lg shadow-md ring-2 ring-scout-500/50 group-hover:ring-scout-500 transition-all">
-            <img src="assets/GHSSMLOGO.jpg" alt="GHSS MUNDERI" class="h-10 w-10 object-cover" />
+        <a href="#home" class="flex items-center gap-3 group interactive-element">
+          <div class="relative overflow-hidden rounded-lg shadow-md ring-2 ring-school-600/50 group-hover:ring-school-600 transition-all duration-500 group-hover:rotate-6">
+            <img src="assets/GHSSMLOGO.jpg" alt="GHSS MUNDERI" class="h-10 w-10 object-cover transform group-hover:scale-110 transition duration-500" />
           </div>
           <div class="flex flex-col">
-            <span class="text-[10px] font-bold tracking-widest uppercase text-scout-600 dark:text-scout-500">GHSS Munderi</span>
+            <span class="text-[10px] font-bold tracking-widest uppercase text-school-600 dark:text-school-500">GHSS Munderi</span>
             <h1 class="text-lg font-extrabold leading-none tracking-tight">Rovers & Rangers</h1>
           </div>
         </a>
 
-        <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-          <a href="#about" class="hover:text-scout-600 dark:hover:text-scout-400 transition-colors">About</a>
-          <a href="#projects" class="hover:text-scout-600 dark:hover:text-scout-400 transition-colors">Projects</a>
-          <a href="#events" class="hover:text-scout-600 dark:hover:text-scout-400 transition-colors">Events</a>
-          <a href="#gallery" class="hover:text-scout-600 dark:hover:text-scout-400 transition-colors">Gallery</a>
-          <a href="#team" class="hover:text-scout-600 dark:hover:text-scout-400 transition-colors">Team</a>
+        <nav class="hidden md:flex items-center gap-8 text-sm font-bold tracking-wide">
+          <a href="#about" class="nav-link interactive-element hover:text-school-600 dark:hover:text-accent-400 transition-colors">About</a>
+          <a href="#projects" class="nav-link interactive-element hover:text-school-600 dark:hover:text-accent-400 transition-colors">Projects</a>
+          <a href="#events" class="nav-link interactive-element hover:text-school-600 dark:hover:text-accent-400 transition-colors">Events</a>
+          <a href="#gallery" class="nav-link interactive-element hover:text-school-600 dark:hover:text-accent-400 transition-colors">Gallery</a>
+          <a href="#team" class="nav-link interactive-element hover:text-school-600 dark:hover:text-accent-400 transition-colors">Team</a>
         </nav>
 
         <div class="flex items-center gap-3">
-          <button id="themeToggle" class="glow-btn rounded-full p-2.5 border flex items-center justify-center" aria-label="Toggle Theme">
+          <button id="themeToggle" class="glow-btn interactive-element rounded-full p-2.5 border flex items-center justify-center" aria-label="Toggle Theme">
             <svg id="sunIcon" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
             <svg id="moonIcon" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
           </button>
 
-          <button id="menuBtn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+          <button id="menuBtn" class="md:hidden p-2 rounded-lg hover:bg-school-100 dark:hover:bg-gray-800 text-school-900 dark:text-white transition-colors interactive-element">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
           </button>
         </div>
       </div>
 
-      <div id="mobileMenu" class="md:hidden hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border-t border-gray-100 dark:border-gray-800">
+      <div id="mobileMenu" class="md:hidden hidden bg-school-50/95 dark:bg-gray-900/95 backdrop-blur-xl border-t border-school-200 dark:border-gray-800 absolute w-full transition-all duration-300 origin-top transform scale-y-0">
         <div class="flex flex-col p-4 space-y-3 font-medium text-center">
-          <a href="#about" class="py-2 hover:text-scout-600 dark:hover:text-scout-400">About</a>
-          <a href="#projects" class="py-2 hover:text-scout-600 dark:hover:text-scout-400">Projects</a>
-          <a href="#events" class="py-2 hover:text-scout-600 dark:hover:text-scout-400">Events</a>
-          <a href="#gallery" class="py-2 hover:text-scout-600 dark:hover:text-scout-400">Gallery</a>
-          <a href="#team" class="py-2 hover:text-scout-600 dark:hover:text-scout-400">Team</a>
-          <a href="#contact" class="py-2 text-scout-600">Contact Us</a>
+          <a href="#about" class="py-2 hover:text-school-600 dark:hover:text-school-400 interactive-element">About</a>
+          <a href="#projects" class="py-2 hover:text-school-600 dark:hover:text-school-400 interactive-element">Projects</a>
+          <a href="#events" class="py-2 hover:text-school-600 dark:hover:text-school-400 interactive-element">Events</a>
+          <a href="#gallery" class="py-2 hover:text-school-600 dark:hover:text-school-400 interactive-element">Gallery</a>
+          <a href="#team" class="py-2 hover:text-school-600 dark:hover:text-school-400 interactive-element">Team</a>
+          <a href="#contact" class="py-2 text-school-600 font-bold interactive-element">Contact Us</a>
         </div>
       </div>
     </header>
 
-    <section id="home" class="relative min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden">
+    <section id="home" class="relative min-h-[95vh] flex items-center justify-center pt-20 overflow-hidden">
       <div class="absolute inset-0 z-0">
-        <img src="assets/cover.jpg" alt="Cover" class="w-full h-full object-cover" />
-        <div class="absolute inset-0 bg-gradient-to-t from-gray-50 via-white/40 to-white/10 dark:from-gray-900 dark:via-gray-900/60 dark:to-gray-900/30"></div>
+        <img id="heroImg" src="assets/cover.jpg" alt="GHSS Munderi Building" class="w-full h-full object-cover transform scale-110" />
+        <div class="absolute inset-0 bg-gradient-to-t from-school-50 via-white/50 to-school-900/20 dark:from-gray-900 dark:via-gray-900/70 dark:to-gray-900/50"></div>
       </div>
 
-      <div class="relative z-10 max-w-5xl mx-auto px-4 text-center mt-10">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 dark:bg-black/60 backdrop-blur-sm border border-white/20 shadow-sm mb-6 animate-fade-in-up">
-          <span class="w-2 h-2 rounded-full bg-scout-600 animate-pulse"></span>
-          <span class="text-xs font-bold uppercase tracking-wider text-scout-700 dark:text-scout-300">Bharat Scouts & Guides • School Unit</span>
+      <div class="relative z-10 max-w-5xl mx-auto px-4 text-center mt-10 reveal active">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-sm border border-school-600/30 shadow-sm mb-6 animate-float cursor-default">
+          <span class="w-2 h-2 rounded-full bg-school-600 animate-pulse"></span>
+          <span class="text-xs font-bold uppercase tracking-wider text-school-700 dark:text-school-300">Bharat Scouts & Guides • School Unit</span>
         </div>
         
-        <h2 class="text-5xl md:text-7xl font-black text-gray-900 dark:text-white leading-tight mb-6 drop-shadow-sm">
+        <h2 class="text-5xl md:text-7xl font-black text-gray-900 dark:text-white leading-tight mb-6 drop-shadow-md transition-transform duration-700 hover:scale-105">
           Service, Leadership <br/>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-scout-600 to-guide-600"> & Adventure</span>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-school-600 to-accent-500"> & Adventure</span>
         </h2>
         
-        <p class="text-lg md:text-xl text-gray-700 dark:text-gray-200 max-w-2xl mx-auto mb-10 font-medium">
+        <p class="text-lg md:text-xl text-gray-800 dark:text-gray-200 max-w-2xl mx-auto mb-10 font-medium drop-shadow-sm">
           Welcome to the official digital hub of GHSS Munderi Rovers & Rangers. Exploring nature, serving the community, and building future leaders.
         </p>
         
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a href="#projects" class="px-8 py-3.5 rounded-xl bg-scout-600 hover:bg-scout-700 text-white font-semibold shadow-lg shadow-scout-500/30 transition-transform hover:-translate-y-1">
+          <a href="#projects" class="interactive-element px-8 py-4 rounded-xl bg-school-600 hover:bg-school-700 text-white font-bold shadow-xl shadow-school-600/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-school-600/50">
             Explore Projects
           </a>
-          <a href="#contact" class="px-8 py-3.5 rounded-xl bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 font-semibold transition-transform hover:-translate-y-1">
+          <a href="#contact" class="interactive-element px-8 py-4 rounded-xl bg-white/90 dark:bg-gray-800/90 backdrop-blur hover:bg-school-50 dark:hover:bg-gray-700 text-school-900 dark:text-white border border-school-200 dark:border-gray-700 font-bold transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
             Join Us
           </a>
         </div>
       </div>
     </section>
 
-    <section id="about" class="py-20 bg-white dark:bg-gray-900">
-      <div class="max-w-7xl mx-auto px-4">
+    <section id="about" class="py-24 bg-white dark:bg-gray-900 overflow-hidden relative">
+      <div class="absolute top-20 -left-20 w-72 h-72 bg-school-200 dark:bg-school-900/30 rounded-full blur-3xl opacity-50 animate-pulse-slow"></div>
+      
+      <div class="max-w-7xl mx-auto px-4 relative z-10">
         <div class="grid md:grid-cols-2 gap-12 items-center">
-          <div class="relative group cursor-pointer" onclick="openLightbox('assets/teamrover.jpg')">
-            <div class="absolute -inset-2 bg-gradient-to-r from-scout-500 to-guide-600 rounded-2xl opacity-20 blur-xl group-hover:opacity-40 transition duration-500"></div>
-            <img src="assets/teamrover.jpg" alt="About Team" class="relative rounded-2xl shadow-2xl w-full object-cover transform transition duration-500 group-hover:scale-[1.01]" />
+          <div class="relative group cursor-pointer reveal interactive-element" onclick="openLightbox('assets/teamrover.jpg')">
+            <div class="absolute -inset-2 bg-gradient-to-r from-school-500 to-accent-500 rounded-3xl opacity-20 blur-xl group-hover:opacity-50 transition duration-700 group-hover:duration-200"></div>
+            <img src="assets/teamrover.jpg" alt="About Team" class="relative rounded-2xl shadow-2xl w-full object-cover transform transition duration-500 group-hover:scale-[1.03] group-hover:-rotate-1 border border-school-100 dark:border-gray-800" />
+            <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-accent-100 dark:bg-accent-900/50 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float"></div>
           </div>
           
-          
-          <div>
-            <h3 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white">About Our Unit</h3>
-            <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+          <div class="reveal reveal-delay-1">
+            <h3 class="text-4xl font-black mb-6 text-gray-900 dark:text-white flex items-center gap-4">
+              <span class="w-10 h-1.5 bg-school-600 rounded-full inline-block transform transition-transform hover:scale-150"></span> 
+              About Our Unit
+            </h3>
+            <p class="text-gray-700 dark:text-gray-300 mb-8 leading-relaxed text-lg">
               GHSS MUNDERI Rovers & Rangers aims to build leadership, discipline, and community service among students. We participate in school and community projects, environmental activities, and skill development programs.
             </p>
             
-            <ul class="space-y-4">
-              <li class="flex items-start gap-3">
-                <div class="p-2 rounded-lg bg-scout-100 text-scout-600 dark:bg-scout-900/30 dark:text-scout-400">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+            <ul class="space-y-6">
+              <li class="flex items-start gap-4 p-5 rounded-2xl hover:bg-school-50 dark:hover:bg-gray-800 transition-all duration-300 border border-transparent hover:border-school-100 dark:hover:border-gray-700 hover:shadow-lg hover:-translate-y-1">
+                <div class="p-4 rounded-xl bg-school-100 text-school-600 dark:bg-school-900/50 dark:text-school-400">
+                  <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                 </div>
                 <div>
-                  <h4 class="font-semibold text-gray-900 dark:text-white">Community Service</h4>
-                  <p class="text-sm text-gray-500 dark:text-gray-400">Regular cleanliness drives and social support.</p>
+                  <h4 class="font-bold text-gray-900 dark:text-white text-xl">Community Service</h4>
+                  <p class="text-gray-600 dark:text-gray-400 mt-1">Regular cleanliness drives and social support initiatives to build a better society.</p>
                 </div>
               </li>
-              <li class="flex items-start gap-3">
-                <div class="p-2 rounded-lg bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+              <li class="flex items-start gap-4 p-5 rounded-2xl hover:bg-school-50 dark:hover:bg-gray-800 transition-all duration-300 border border-transparent hover:border-school-100 dark:hover:border-gray-700 hover:shadow-lg hover:-translate-y-1">
+                <div class="p-4 rounded-xl bg-accent-100 text-accent-600 dark:bg-accent-900/30 dark:text-accent-400">
+                  <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
                 </div>
                 <div>
-                  <h4 class="font-semibold text-gray-900 dark:text-white">Adventure & Camps</h4>
-                  <p class="text-sm text-gray-500 dark:text-gray-400">Hiking, camping, and outdoor survival skills.</p>
+                  <h4 class="font-bold text-gray-900 dark:text-white text-xl">Adventure & Camps</h4>
+                  <p class="text-gray-600 dark:text-gray-400 mt-1">Hiking, camping, and outdoor survival skills that test endurance and teamwork.</p>
                 </div>
               </li>
             </ul>
@@ -207,202 +277,226 @@
       </div>
     </section>
 
-    <section id="projects" class="py-20 bg-gray-50 dark:bg-gray-800/50">
+    <section id="projects" class="py-24 bg-school-50 dark:bg-gray-800/50 border-y border-school-100 dark:border-gray-800">
       <div class="max-w-7xl mx-auto px-4">
-        <div class="flex justify-between items-end mb-12">
+        <div class="flex justify-between items-end mb-12 reveal">
           <div>
-            <span class="text-scout-600 dark:text-scout-400 font-semibold tracking-wider text-sm">WHAT WE DO</span>
-            <h3 class="text-3xl md:text-4xl font-bold mt-2 text-gray-900 dark:text-white">Our Projects</h3>
+            <span class="text-school-600 dark:text-accent-500 font-bold tracking-widest text-sm uppercase">What We Do</span>
+            <h3 class="text-4xl md:text-5xl font-black mt-2 text-gray-900 dark:text-white">Our Projects</h3>
           </div>
-          <a href="#contact" class="hidden md:inline-flex items-center gap-1 text-sm font-medium text-scout-600 hover:text-scout-700">
-            Support us <span>→</span>
+          <a href="#contact" class="interactive-element hidden md:inline-flex items-center gap-2 text-sm font-bold text-school-600 hover:text-school-700 bg-white shadow-sm border border-school-200 px-5 py-2.5 rounded-full dark:bg-gray-800 dark:border-gray-700 dark:text-accent-400 transition-all hover:scale-105 hover:shadow-md">
+            Support us <span class="text-lg transition-transform group-hover:translate-x-1">→</span>
           </a>
         </div>
 
         <div class="grid md:grid-cols-3 gap-8">
-          <article class="group bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-scout-500/10 transition-all duration-300 hover:-translate-y-2 border border-gray-100 dark:border-gray-800">
-            <div class="h-56 overflow-hidden cursor-pointer" onclick="openLightbox('assets/projects/paperbag1.jpg')">
+          <article class="interactive-element reveal reveal-delay-1 group bg-white dark:bg-gray-900 rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-school-600/20 transition-all duration-500 hover:-translate-y-3 border border-school-100 dark:border-gray-700">
+            <div class="h-60 overflow-hidden cursor-pointer relative" onclick="openLightbox('assets/projects/paperbag1.jpg')">
+              <div class="absolute inset-0 bg-school-600/10 group-hover:opacity-0 transition-opacity duration-500 z-10"></div>
               <img src="assets/projects/paperbag1.jpg" alt="Paper Bag" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700" />
             </div>
-            <div class="p-6">
-              <div class="flex items-center gap-2 mb-3">
-                <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">Eco-Friendly</span>
-                <span class="text-xs text-gray-400">2025</span>
+            <div class="p-8 relative">
+              <div class="absolute -top-6 right-6 bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg border border-school-50 dark:border-gray-700 transform group-hover:scale-110 transition duration-300">
+                <span class="block w-5 h-5 rounded-full bg-green-500 animate-pulse"></span>
               </div>
-              <h4 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">Paper Bag Making</h4>
-              <p class="text-gray-600 dark:text-gray-400 text-sm">Promoting eco-friendly alternatives by making and distributing handmade paper bags.</p>
+              <div class="flex items-center gap-2 mb-4">
+                <span class="px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300">Eco-Friendly</span>
+                <span class="text-sm font-semibold text-gray-400">2025</span>
+              </div>
+              <h4 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-school-600 transition-colors">Paper Bag Making</h4>
+              <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Promoting eco-friendly alternatives by making and distributing handmade paper bags to local vendors.</p>
             </div>
           </article>
 
-          <article class="group bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300 hover:-translate-y-2 border border-gray-100 dark:border-gray-800">
-            <div class="h-56 overflow-hidden cursor-pointer" onclick="openLightbox('assets/projects/teamwork.jpg')">
+          <article class="interactive-element reveal reveal-delay-2 group bg-white dark:bg-gray-900 rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-accent-500/20 transition-all duration-500 hover:-translate-y-3 border border-school-100 dark:border-gray-700">
+            <div class="h-60 overflow-hidden cursor-pointer relative" onclick="openLightbox('assets/projects/teamwork.jpg')">
+              <div class="absolute inset-0 bg-accent-500/10 group-hover:opacity-0 transition-opacity duration-500 z-10"></div>
               <img src="assets/projects/teamwork.jpg" alt="Orphanage" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700" />
             </div>
-            <div class="p-6">
-              <div class="flex items-center gap-2 mb-3">
-                <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300">Service</span>
-                <span class="text-xs text-gray-400">2025</span>
+            <div class="p-8 relative">
+              <div class="absolute -top-6 right-6 bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg border border-school-50 dark:border-gray-700 transform group-hover:scale-110 transition duration-300">
+                <span class="block w-5 h-5 rounded-full bg-accent-500 animate-pulse"></span>
               </div>
-              <h4 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">Orphanage Visit</h4>
-              <p class="text-gray-600 dark:text-gray-400 text-sm">A heartwarming day spent offering support and companionship at a local orphanage.</p>
+              <div class="flex items-center gap-2 mb-4">
+                <span class="px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-accent-100 text-accent-700 dark:bg-accent-900/40 dark:text-accent-300">Service</span>
+                <span class="text-sm font-semibold text-gray-400">2025</span>
+              </div>
+              <h4 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-accent-500 transition-colors">Orphanage Visit</h4>
+              <p class="text-gray-600 dark:text-gray-400 leading-relaxed">A heartwarming day spent offering support, organizing activities, and providing companionship.</p>
             </div>
           </article>
 
-          <article class="group bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-emerald-500/10 transition-all duration-300 hover:-translate-y-2 border border-gray-100 dark:border-gray-800">
-            <div class="h-56 overflow-hidden cursor-pointer" onclick="openLightbox('assets/projects/cleaning.jpg')">
+          <article class="interactive-element reveal reveal-delay-3 group bg-white dark:bg-gray-900 rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-school-600/20 transition-all duration-500 hover:-translate-y-3 border border-school-100 dark:border-gray-700">
+            <div class="h-60 overflow-hidden cursor-pointer relative" onclick="openLightbox('assets/projects/cleaning.jpg')">
+              <div class="absolute inset-0 bg-school-600/10 group-hover:opacity-0 transition-opacity duration-500 z-10"></div>
               <img src="assets/projects/cleaning.jpg" alt="Cleaning" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700" />
             </div>
-            <div class="p-6">
-              <div class="flex items-center gap-2 mb-3">
-                <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">Nature</span>
-                <span class="text-xs text-gray-400">2024</span>
+            <div class="p-8 relative">
+              <div class="absolute -top-6 right-6 bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg border border-school-50 dark:border-gray-700 transform group-hover:scale-110 transition duration-300">
+                <span class="block w-5 h-5 rounded-full bg-school-600 animate-pulse"></span>
               </div>
-              <h4 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">Roadside Cleaning</h4>
-              <p class="text-gray-600 dark:text-gray-400 text-sm">Taking responsibility for our surroundings by cleaning the campus and roadside areas.</p>
+              <div class="flex items-center gap-2 mb-4">
+                <span class="px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-school-100 text-school-700 dark:bg-school-900/40 dark:text-school-300">Nature</span>
+                <span class="text-sm font-semibold text-gray-400">2024</span>
+              </div>
+              <h4 class="text-2xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-school-600 transition-colors">Roadside Cleaning</h4>
+              <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Taking active responsibility for our surroundings by thoroughly cleaning the campus and nearby roadsides.</p>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="events" class="py-20 bg-white dark:bg-gray-900">
+    <section id="events" class="py-24 bg-white dark:bg-gray-900">
       <div class="max-w-7xl mx-auto px-4">
-        <h3 class="text-3xl font-bold mb-2 text-gray-900 dark:text-white">Upcoming Events</h3>
-        <p class="text-gray-500 mb-10">Mark your calendars for our next adventures.</p>
+        <div class="text-center reveal mb-16">
+          <h3 class="text-4xl md:text-5xl font-black mb-3 text-gray-900 dark:text-white">Upcoming Events</h3>
+          <p class="text-school-600 dark:text-accent-400 font-medium text-lg">Mark your calendars for our next adventures.</p>
+        </div>
 
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="p-6 rounded-2xl bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700">
-            <div class="text-scout-600 font-bold text-lg mb-1">Nov 29-30</div>
-            <h4 class="text-xl font-bold mb-2 dark:text-white">Dwidiya Sopan Camp</h4>
-            <p class="text-sm text-gray-600 dark:text-gray-400">Intensive training and testing for the Dwidiya Sopan badge.</p>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="interactive-element reveal reveal-delay-1 p-8 rounded-3xl bg-school-50 dark:bg-gray-800 border-l-8 border-school-600 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+            <div class="text-school-600 dark:text-school-400 font-black text-xl mb-3 tracking-wide uppercase">Nov 29-30</div>
+            <h4 class="text-2xl font-bold mb-4 dark:text-white">Dwidiya Sopan Camp</h4>
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">Intensive training and testing for the Dwidiya Sopan badge. Bring your gear and readiness!</p>
           </div>
-          <div class="p-6 rounded-2xl bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700">
-            <div class="text-scout-600 font-bold text-lg mb-1">Yearly</div>
-            <h4 class="text-xl font-bold mb-2 dark:text-white">Annual Training Camp</h4>
-            <p class="text-sm text-gray-600 dark:text-gray-400">Overnight stay focusing on patrol building and survival skills.</p>
+          <div class="interactive-element reveal reveal-delay-2 p-8 rounded-3xl bg-school-50 dark:bg-gray-800 border-l-8 border-accent-500 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+            <div class="text-accent-600 dark:text-accent-400 font-black text-xl mb-3 tracking-wide uppercase">Yearly</div>
+            <h4 class="text-2xl font-bold mb-4 dark:text-white">Annual Training Camp</h4>
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">Overnight stay focusing on patrol building, survival skills, knot tying, and campfire bonds.</p>
           </div>
-          <div class="p-6 rounded-2xl bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700">
-            <div class="text-scout-600 font-bold text-lg mb-1">Monthly</div>
-            <h4 class="text-xl font-bold mb-2 dark:text-white">Service Day</h4>
-            <p class="text-sm text-gray-600 dark:text-gray-400">Dedicated day for community outreach and cleanup.</p>
+          <div class="interactive-element reveal reveal-delay-3 p-8 rounded-3xl bg-school-50 dark:bg-gray-800 border-l-8 border-school-800 dark:border-school-300 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+            <div class="text-school-800 dark:text-school-300 font-black text-xl mb-3 tracking-wide uppercase">Monthly</div>
+            <h4 class="text-2xl font-bold mb-4 dark:text-white">Service Day</h4>
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">Dedicated day for community outreach, local cleanup, and environmental awareness campaigns.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="gallery" class="py-20 bg-gray-900 text-white relative overflow-hidden">
-      <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-scout-600 rounded-full blur-[100px] opacity-20"></div>
-      <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-guide-600 rounded-full blur-[100px] opacity-20"></div>
+    <section id="gallery" class="py-24 bg-gray-950 text-white relative overflow-hidden">
+      <div class="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-school-600 rounded-full blur-[140px] opacity-40 animate-pulse-slow"></div>
+      <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-accent-600 rounded-full blur-[140px] opacity-30 animate-pulse-slow" style="animation-delay: -4s;"></div>
 
       <div class="max-w-7xl mx-auto px-4 relative z-10">
-        <div class="text-center mb-12">
-          <h3 class="text-3xl md:text-4xl font-bold">Activity Gallery</h3>
-          <p class="text-gray-400 mt-2">Capturing moments of unity and service. Click an image to zoom.</p>
+        <div class="text-center mb-16 reveal">
+          <span class="text-school-400 font-bold tracking-widest text-sm uppercase">Memories Captured</span>
+          <h3 class="text-4xl md:text-5xl font-black mt-3">Activity Gallery</h3>
+          <p class="text-gray-400 mt-4 text-lg">Moments of unity, learning, and service. Click to expand.</p>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div class="group aspect-square overflow-hidden rounded-xl bg-gray-800 cursor-pointer">
-            <img src="assets/gallery/1.jpg" class="gallery-img w-full h-full object-cover transition duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100" loading="lazy" />
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          <div class="interactive-element reveal reveal-delay-1 group aspect-square overflow-hidden rounded-2xl bg-gray-800 cursor-pointer border border-gray-700 hover:border-school-500 transition-all shadow-lg hover:shadow-school-600/40">
+            <img src="assets/gallery/1.jpg" class="gallery-img w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100" loading="lazy" />
           </div>
-          <div class="group aspect-square overflow-hidden rounded-xl bg-gray-800 cursor-pointer">
-            <img src="assets/gallery/2.jpg" class="gallery-img w-full h-full object-cover transition duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100" loading="lazy" />
+          <div class="interactive-element reveal reveal-delay-1 group aspect-square overflow-hidden rounded-2xl bg-gray-800 cursor-pointer border border-gray-700 hover:border-school-500 transition-all shadow-lg hover:shadow-school-600/40">
+            <img src="assets/gallery/2.jpg" class="gallery-img w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100" loading="lazy" />
           </div>
-          <div class="group aspect-square overflow-hidden rounded-xl bg-gray-800 cursor-pointer">
-            <img src="assets/gallery/3.jpg" class="gallery-img w-full h-full object-cover transition duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100" loading="lazy" />
+          <div class="interactive-element reveal reveal-delay-2 group aspect-square overflow-hidden rounded-2xl bg-gray-800 cursor-pointer border border-gray-700 hover:border-school-500 transition-all shadow-lg hover:shadow-school-600/40">
+            <img src="assets/gallery/3.jpg" class="gallery-img w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100" loading="lazy" />
           </div>
-          <div class="group aspect-square overflow-hidden rounded-xl bg-gray-800 cursor-pointer">
-            <img src="assets/gallery/4.jpg" class="gallery-img w-full h-full object-cover transition duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100" loading="lazy" />
+          <div class="interactive-element reveal reveal-delay-2 group aspect-square overflow-hidden rounded-2xl bg-gray-800 cursor-pointer border border-gray-700 hover:border-school-500 transition-all shadow-lg hover:shadow-school-600/40">
+            <img src="assets/gallery/4.jpg" class="gallery-img w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100" loading="lazy" />
           </div>
-          <div class="group aspect-square overflow-hidden rounded-xl bg-gray-800 cursor-pointer">
-            <img src="assets/gallery/5.jpg" class="gallery-img w-full h-full object-cover transition duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100" loading="lazy" />
+          <div class="interactive-element reveal reveal-delay-3 group aspect-square overflow-hidden rounded-2xl bg-gray-800 cursor-pointer border border-gray-700 hover:border-school-500 transition-all shadow-lg hover:shadow-school-600/40">
+            <img src="assets/gallery/5.jpg" class="gallery-img w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100" loading="lazy" />
           </div>
-          <div class="group aspect-square overflow-hidden rounded-xl bg-gray-800 cursor-pointer">
-            <img src="assets/gallery/6.jpg" class="gallery-img w-full h-full object-cover transition duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100" loading="lazy" />
+          <div class="interactive-element reveal reveal-delay-3 group aspect-square overflow-hidden rounded-2xl bg-gray-800 cursor-pointer border border-gray-700 hover:border-school-500 transition-all shadow-lg hover:shadow-school-600/40">
+            <img src="assets/gallery/6.jpg" class="gallery-img w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100" loading="lazy" />
           </div>
-          <div class="group aspect-square overflow-hidden rounded-xl bg-gray-800 cursor-pointer">
-            <img src="assets/gallery/7.jpg" class="gallery-img w-full h-full object-cover transition duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100" loading="lazy" />
+          <div class="interactive-element reveal reveal-delay-4 group aspect-square overflow-hidden rounded-2xl bg-gray-800 cursor-pointer border border-gray-700 hover:border-school-500 transition-all shadow-lg hover:shadow-school-600/40">
+            <img src="assets/gallery/7.jpg" class="gallery-img w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100" loading="lazy" />
           </div>
-          <div class="group aspect-square overflow-hidden rounded-xl bg-gray-800 cursor-pointer">
-            <img src="assets/gallery/8.jpg" class="gallery-img w-full h-full object-cover transition duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100" loading="lazy" />
+          <div class="interactive-element reveal reveal-delay-4 group aspect-square overflow-hidden rounded-2xl bg-gray-800 cursor-pointer border border-gray-700 hover:border-school-500 transition-all shadow-lg hover:shadow-school-600/40">
+            <img src="assets/gallery/8.jpg" class="gallery-img w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100" loading="lazy" />
           </div>
         </div>
 
-        <div class="mt-16 text-center">
-          <h3 class="text-2xl font-bold mb-6">Camp Highlights</h3>
-          <div class="flex flex-wrap justify-center gap-4">
-             <div class="w-full md:w-1/3 aspect-video rounded-xl overflow-hidden border border-white/10 cursor-pointer">
-               <img src="assets/campvibe/picture 1.jpg" class="gallery-img w-full h-full object-cover" />
+        <div class="mt-24 text-center reveal">
+          <div class="inline-block px-8 py-3 rounded-full border border-school-600/50 bg-school-900/40 text-school-300 font-bold mb-10 tracking-widest uppercase">Camp Highlights</div>
+          <div class="flex flex-wrap justify-center gap-8">
+             <div class="interactive-element w-full md:w-5/12 aspect-video rounded-3xl overflow-hidden border-2 border-gray-800 hover:border-school-500 cursor-pointer group shadow-2xl transition-all duration-500">
+               <img src="assets/campvibe/picture 1.jpg" class="gallery-img w-full h-full object-cover transition duration-1000 group-hover:scale-110 opacity-90 group-hover:opacity-100" />
              </div>
-             <div class="w-full md:w-1/3 aspect-video rounded-xl overflow-hidden border border-white/10 cursor-pointer">
-               <img src="assets/campvibe/picture 2.jpg" class="gallery-img w-full h-full object-cover" />
+             <div class="interactive-element w-full md:w-5/12 aspect-video rounded-3xl overflow-hidden border-2 border-gray-800 hover:border-school-500 cursor-pointer group shadow-2xl transition-all duration-500">
+               <img src="assets/campvibe/picture 2.jpg" class="gallery-img w-full h-full object-cover transition duration-1000 group-hover:scale-110 opacity-90 group-hover:opacity-100" />
              </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="team" class="py-20 bg-white dark:bg-gray-900">
-      <div class="max-w-7xl mx-auto px-4 text-center">
-        <h3 class="text-3xl font-bold mb-2 text-gray-900 dark:text-white">Our Leaders</h3>
-        <p class="text-gray-500 mb-12">Guiding us towards excellence.</p>
+    <section id="team" class="py-28 bg-school-50 dark:bg-gray-900 relative">
+      <div class="absolute top-10 left-0 right-0 overflow-hidden opacity-5 pointer-events-none flex justify-center">
+         <h2 class="text-[15rem] font-black whitespace-nowrap text-school-900 dark:text-gray-100 select-none">LEADERSHIP</h2>
+      </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div class="group cursor-pointer">
-            <div class="relative w-40 h-40 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-gray-100 dark:ring-gray-800 group-hover:ring-scout-500 transition-all duration-300">
+      <div class="max-w-7xl mx-auto px-4 text-center relative z-10">
+        <div class="reveal">
+          <h3 class="text-4xl md:text-5xl font-black mb-4 text-gray-900 dark:text-white">Our Leaders</h3>
+          <p class="text-school-700 dark:text-accent-400 font-medium mb-20 text-lg">Guiding us towards excellence with dedication.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div class="interactive-element reveal reveal-delay-1 group cursor-pointer bg-white dark:bg-gray-800 p-8 rounded-[2rem] shadow-sm hover:shadow-2xl hover:shadow-school-600/20 transition-all duration-300 hover:-translate-y-4 border border-school-100 dark:border-gray-700">
+            <div class="relative w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden ring-4 ring-school-100 dark:ring-gray-700 group-hover:ring-school-500 transition-all duration-500 group-hover:scale-110">
               <img src="assets/team/leader1.png" class="gallery-img w-full h-full object-cover" />
             </div>
-            <h4 class="text-lg font-bold text-gray-900 dark:text-white">Ms. Febina Ragesh</h4>
-            <p class="text-sm text-scout-600 dark:text-scout-400 font-medium">Scout Master / Guide Captain</p>
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-school-600 transition-colors">Ms. Febina Ragesh</h4>
+            <p class="text-xs text-school-600 dark:text-accent-400 font-black mt-2 uppercase tracking-widest">Scout Master / Guide Capt.</p>
           </div>
-          <div class="group cursor-pointer">
-            <div class="relative w-40 h-40 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-gray-100 dark:ring-gray-800 group-hover:ring-scout-500 transition-all duration-300">
+          <div class="interactive-element reveal reveal-delay-2 group cursor-pointer bg-white dark:bg-gray-800 p-8 rounded-[2rem] shadow-sm hover:shadow-2xl hover:shadow-school-600/20 transition-all duration-300 hover:-translate-y-4 border border-school-100 dark:border-gray-700">
+            <div class="relative w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden ring-4 ring-school-100 dark:ring-gray-700 group-hover:ring-school-500 transition-all duration-500 group-hover:scale-110">
               <img src="assets/team/leader2.png" class="gallery-img w-full h-full object-cover" />
             </div>
-            <h4 class="text-lg font-bold text-gray-900 dark:text-white">Anek K Santhosh</h4>
-            <p class="text-sm text-scout-600 dark:text-scout-400 font-medium">Patrol Leader</p>
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-school-600 transition-colors">Anek K Santhosh</h4>
+            <p class="text-xs text-school-600 dark:text-accent-400 font-black mt-2 uppercase tracking-widest">Patrol Leader</p>
           </div>
-          <div class="group cursor-pointer">
-            <div class="relative w-40 h-40 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-gray-100 dark:ring-gray-800 group-hover:ring-scout-500 transition-all duration-300">
+          <div class="interactive-element reveal reveal-delay-3 group cursor-pointer bg-white dark:bg-gray-800 p-8 rounded-[2rem] shadow-sm hover:shadow-2xl hover:shadow-school-600/20 transition-all duration-300 hover:-translate-y-4 border border-school-100 dark:border-gray-700">
+            <div class="relative w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden ring-4 ring-school-100 dark:ring-gray-700 group-hover:ring-school-500 transition-all duration-500 group-hover:scale-110">
               <img src="assets/team/leader3.png" class="gallery-img w-full h-full object-cover" />
             </div>
-            <h4 class="text-lg font-bold text-gray-900 dark:text-white">Muhammed Murshid PV</h4>
-            <p class="text-sm text-scout-600 dark:text-scout-400 font-medium">Patrol Leader</p>
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-school-600 transition-colors">Muhammed Murshid PV</h4>
+            <p class="text-xs text-school-600 dark:text-accent-400 font-black mt-2 uppercase tracking-widest">Patrol Leader</p>
           </div>
-          <div class="group cursor-pointer">
-            <div class="relative w-40 h-40 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-gray-100 dark:ring-gray-800 group-hover:ring-scout-500 transition-all duration-300">
+          <div class="interactive-element reveal reveal-delay-4 group cursor-pointer bg-white dark:bg-gray-800 p-8 rounded-[2rem] shadow-sm hover:shadow-2xl hover:shadow-school-600/20 transition-all duration-300 hover:-translate-y-4 border border-school-100 dark:border-gray-700">
+            <div class="relative w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden ring-4 ring-school-100 dark:ring-gray-700 group-hover:ring-school-500 transition-all duration-500 group-hover:scale-110">
               <img src="assets/team/leader4.png" class="gallery-img w-full h-full object-cover" />
             </div>
-            <h4 class="text-lg font-bold text-gray-900 dark:text-white">Rithunandha</h4>
-            <p class="text-sm text-scout-600 dark:text-scout-400 font-medium">Guides Patrol Leader</p>
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-school-600 transition-colors">Rithunandha</h4>
+            <p class="text-xs text-school-600 dark:text-accent-400 font-black mt-2 uppercase tracking-widest">Guides Patrol Leader</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-800/50">
-      <div class="max-w-xl mx-auto px-4">
-        <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 border border-gray-100 dark:border-gray-800">
-          <h3 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white text-center">Get in Touch</h3>
+    <section id="contact" class="py-24 bg-white dark:bg-gray-800/50">
+      <div class="max-w-xl mx-auto px-4 reveal">
+        <div class="bg-school-50 dark:bg-gray-900 rounded-[2.5rem] shadow-2xl p-10 md:p-12 border-2 border-school-100 dark:border-gray-700 relative overflow-hidden">
+          <div class="absolute -top-10 -right-10 w-40 h-40 bg-school-600 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+
+          <h3 class="text-4xl font-black mb-3 text-gray-900 dark:text-white text-center">Get in Touch</h3>
+          <p class="text-center text-gray-600 dark:text-gray-400 mb-10 font-medium">We'd love to hear from you. Send us a message!</p>
           
-          <form name="contact" method="POST" data-netlify="true" class="space-y-4">
+          <form name="contact" method="POST" data-netlify="true" class="space-y-6 relative z-10">
             <input type="hidden" name="form-name" value="contact" />
             
-            <div>
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
-              <input name="name" type="text" required class="w-full px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-scout-500 outline-none transition-all" />
+            <div class="interactive-element">
+              <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Full Name</label>
+              <input name="name" type="text" required class="w-full px-6 py-4 rounded-2xl bg-white dark:bg-gray-800 border border-school-200 dark:border-gray-700 focus:ring-4 focus:ring-school-600/30 focus:border-school-600 outline-none transition-all shadow-sm" placeholder="John Doe" />
             </div>
 
-            <div>
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
-              <input name="email" type="email" required class="w-full px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-scout-500 outline-none transition-all" />
+            <div class="interactive-element">
+              <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
+              <input name="email" type="email" required class="w-full px-6 py-4 rounded-2xl bg-white dark:bg-gray-800 border border-school-200 dark:border-gray-700 focus:ring-4 focus:ring-school-600/30 focus:border-school-600 outline-none transition-all shadow-sm" placeholder="john123@gmail.com" />
             </div>
 
-            <div>
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
-              <textarea name="message" rows="4" required class="w-full px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-scout-500 outline-none transition-all"></textarea>
+            <div class="interactive-element">
+              <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Your Message</label>
+              <textarea name="message" rows="4" required class="w-full px-6 py-4 rounded-2xl bg-white dark:bg-gray-800 border border-school-200 dark:border-gray-700 focus:ring-4 focus:ring-school-600/30 focus:border-school-600 outline-none transition-all shadow-sm resize-none" placeholder="How can we help you?"></textarea>
             </div>
 
-            <button type="submit" class="w-full py-3 rounded-lg bg-scout-600 text-white font-bold hover:bg-scout-700 transition-colors shadow-lg shadow-scout-500/30">
+            <button type="submit" class="interactive-element w-full py-4 rounded-2xl bg-school-600 text-white font-black uppercase tracking-wider hover:bg-school-700 transition-all shadow-xl shadow-school-600/30 hover:shadow-school-600/50 hover:-translate-y-1">
               Send Message
             </button>
           </form>
@@ -410,33 +504,90 @@
       </div>
     </section>
 
-    <footer class="bg-white dark:bg-gray-950 border-t border-gray-100 dark:border-gray-800 pt-12 pb-8">
-      <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
-        <div class="text-center md:text-left">
-          <h5 class="font-bold text-gray-900 dark:text-white">GHSS MUNDERI</h5>
-          <p class="text-sm text-gray-500">Rovers & Rangers Unit</p>
+    <footer class="bg-school-900 dark:bg-gray-950 border-t-8 border-school-600 pt-16 pb-8 text-school-100">
+      <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="text-center md:text-left flex items-center gap-5">
+          <div class="p-2.5 bg-white rounded-xl shadow-lg">
+             <img src="assets/GHSSMLOGO.jpg" alt="Logo" class="w-12 h-12 rounded-lg object-cover" />
+          </div>
+          <div>
+            <h5 class="font-black text-white text-2xl tracking-wide">GHSS MUNDERI</h5>
+            <p class="text-school-300 font-bold tracking-widest text-xs uppercase mt-1">Rovers & Rangers Unit</p>
+          </div>
         </div>
         
-        <p class="text-sm text-gray-500">© <span id="year"></span> All copyrights reserved.</p>
+        <p class="text-sm text-school-400 font-medium">© <span id="year"></span> All copyrights reserved.</p>
         
-        <div class="text-sm text-gray-400">
-          Designed by <span class="text-scout-600 dark:text-scout-400">Muhammed Murshid +2 Humanities</span>
+        <div class="text-sm text-school-300 bg-school-800/50 dark:bg-gray-900 px-6 py-3 rounded-full border border-school-700 backdrop-blur-sm">
+          Designed by <span class="text-white font-bold">Muhammed Murshid H2 2K24 BATCH</span>
         </div>
       </div>
     </footer>
 
     <script>
       /* ---------------------------
-         1. Lightbox / Image Zoom
+         1. Custom Mouse Cursor Logic
+      --------------------------- */
+      const cursorDot = document.querySelector('.cursor-dot');
+      const cursorOutline = document.querySelector('.cursor-outline');
+      const interactiveElements = document.querySelectorAll('.interactive-element, a, button, input, textarea, img.cursor-pointer');
+      
+      let mouseX = 0, mouseY = 0;
+      let outlineX = 0, outlineY = 0;
+
+      // Update actual mouse coordinates
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if(cursorDot) {
+            cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+        }
+      });
+
+      // Smooth trailing effect for the outline via requestAnimationFrame
+      function animateCursor() {
+        if(cursorOutline) {
+            let distX = mouseX - outlineX;
+            let distY = mouseY - outlineY;
+            outlineX = outlineX + (distX * 0.15); // Lerp factor for smooth follow
+            outlineY = outlineY + (distY * 0.15);
+            cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
+        }
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+
+      // Expand cursor on interactive elements
+      interactiveElements.forEach((el) => {
+        el.addEventListener('mouseenter', () => {
+          if(cursorOutline) cursorOutline.classList.add('hover');
+        });
+        el.addEventListener('mouseleave', () => {
+          if(cursorOutline) cursorOutline.classList.remove('hover');
+        });
+      });
+
+      /* ---------------------------
+         2. Hero Parallax Effect
+      --------------------------- */
+      const heroImg = document.getElementById('heroImg');
+      window.addEventListener('scroll', () => {
+        if(heroImg) {
+            const scrollY = window.scrollY;
+            // Move image down slightly as user scrolls down creating depth
+            heroImg.style.transform = `translateY(${scrollY * 0.4}px) scale(1.1)`; 
+        }
+      });
+
+      /* ---------------------------
+         3. Lightbox / Image Zoom
       --------------------------- */
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
 
-      // Function to open lightbox with specific image source
       window.openLightbox = function(src) {
         lightboxImg.src = src;
         lightbox.classList.remove('hidden');
-        // Small delay to allow 'display:flex' to apply before fading in
         setTimeout(() => {
           lightbox.classList.remove('opacity-0');
           lightboxImg.classList.remove('scale-95');
@@ -444,7 +595,6 @@
         }, 10);
       };
 
-      // Function to close lightbox
       window.closeLightbox = function() {
         lightbox.classList.add('opacity-0');
         lightboxImg.classList.remove('scale-100');
@@ -452,34 +602,43 @@
         setTimeout(() => {
           lightbox.classList.add('hidden');
           lightboxImg.src = '';
-        }, 300); // Matches transition duration
+        }, 300);
       };
 
-      // Automatically attach click listeners to images in content sections
-      // We look for images in #gallery, #team, and any element with class 'gallery-img'
       document.addEventListener('DOMContentLoaded', () => {
-        // Select images from specific sections to avoid zooming logos or icons
         const images = document.querySelectorAll('#gallery img, #team img, .gallery-img');
-        
         images.forEach(img => {
-          // Add pointer cursor
           img.classList.add('cursor-pointer');
-          // Add click event
           img.addEventListener('click', (e) => {
-            e.stopPropagation(); // Stop event from bubbling up
+            e.stopPropagation();
             openLightbox(img.src);
           });
         });
       });
 
+      /* ---------------------------
+         4. Scroll Reveal Animations
+      --------------------------- */
+      function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+        for (var i = 0; i < reveals.length; i++) {
+          var windowHeight = window.innerHeight;
+          var elementTop = reveals[i].getBoundingClientRect().top;
+          var elementVisible = 120; // Triggers slightly earlier for smoother feel
+          if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add("active");
+          }
+        }
+      }
+      window.addEventListener("scroll", reveal);
+      setTimeout(reveal, 100);
 
       /* ---------------------------
-         2. Theme Toggle Logic
+         5. Theme Toggle Logic
       --------------------------- */
       const themeToggle = document.getElementById('themeToggle');
       const html = document.documentElement;
       
-      // Check LocalStorage for theme preference
       if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         html.classList.add('dark');
       } else {
@@ -496,16 +655,22 @@
       });
 
       /* ---------------------------
-         3. Mobile Menu
+         6. Mobile Menu Animation Fix
       --------------------------- */
       const menuBtn = document.getElementById('menuBtn');
       const mobileMenu = document.getElementById('mobileMenu');
       menuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
+        if(mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.remove('hidden');
+            setTimeout(() => mobileMenu.classList.remove('scale-y-0'), 10);
+        } else {
+            mobileMenu.classList.add('scale-y-0');
+            setTimeout(() => mobileMenu.classList.add('hidden'), 300);
+        }
       });
 
       /* ---------------------------
-         4. Footer Year
+         7. Footer Year
       --------------------------- */
       document.getElementById('year').textContent = new Date().getFullYear();
     </script>
